@@ -1,0 +1,50 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+void rmDup(int array[], int& size)
+{
+  for (int i = 0; i < size; i++)
+  {
+    for (int j = i + 1; j < size; j++)
+    {
+      if (array[i] == array[j])
+      {
+        array[i - 1 ] = array[i]; /* WRONG! array[-1] = something */
+        size--;
+      }
+    }
+  }
+}
+int main(void)
+{
+
+  int a[10], b[10] = {0};
+
+  for(int i=0; i<10; i++)
+    cin >> a[i];
+
+  for(int i=0; i<10; i++)
+    cin >> b[i];
+
+  int n =100;
+  int c[n];
+
+  for(int i=0; i<10; i++)
+    for(int j=0; j<10; j++)
+      c[i*10+j] = a[i]+b[j];
+
+  sort(c,c+(n));
+
+  rmDup(c,n);
+
+  for(int i=0; i<(sizeof(c)/sizeof(int)); i++)
+  {
+    if(i%10==0&&i!=0)
+      cout << endl;
+    if(i%10!=0)
+      cout << " ";
+    cout << c[i];
+  }
+  cout << endl;
+}
